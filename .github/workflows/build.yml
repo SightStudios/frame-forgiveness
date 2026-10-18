@@ -22,8 +22,8 @@ jobs:
 
       - name: Patch bindings and point the SDK at them
         run: |
-          perl -0pi -e 's/\[\[link\(android\)\]\]\nclass SequenceTriggerGameObject/[[link(android), depends(SequenceTriggerState)]]\nclass SequenceTriggerGameObject/' bindings-pinned/bindings/*/GeometryDash.bro
-          grep -n -B1 "^class SequenceTriggerGameObject" bindings-pinned/bindings/2.2081/GeometryDash.bro
+          perl -0pi -e 's/\[\[link\(android\)\]\]\nclass SequenceTriggerGameObject/[[depends(SequenceTriggerState)]]\n[[link(android)]]\nclass SequenceTriggerGameObject/' bindings-pinned/bindings/*/GeometryDash.bro
+          grep -n -B2 "^class SequenceTriggerGameObject" bindings-pinned/bindings/2.2081/GeometryDash.bro
           echo "GEODE_BINDINGS_REPO_PATH=$GITHUB_WORKSPACE/bindings-pinned" >> "$GITHUB_ENV"
 
       - name: Build the mod
