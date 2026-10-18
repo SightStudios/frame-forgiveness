@@ -12,6 +12,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Fetch pinned bindings
+        uses: actions/checkout@v4
+        with:
+          repository: geode-sdk/bindings
+          ref: 1605f500d053f8de122bf5c7dc6d17c24866e02e
+          path: bindings-pinned
+
+      - name: Patch bindings and point the SDK at them
+        run: |
+          perl -0pi -e 's/\[\[link\(android\)\]\]\nclass SequenceTriggerGameObject/[[link(android), depends(SequenceTriggerState)]]\nclass SequenceTriggerGameObject/' bindings-pinned/bindings/*/GeometryDash.bro
+          grep -n -B1 "^class SequenceTriggerGameObject" bindings-pinned/bindings/2.2081/GeometryDash.bro
+          echo "GEODE_BINDINGS_REPO_PATH=$GITHUB_WORKSPACE/bindings-pinned" >> "$GITHUB_ENV"
+
       - name: Build the mod
         uses: geode-sdk/build-geode-mod@main
         with:
