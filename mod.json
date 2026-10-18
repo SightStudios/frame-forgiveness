@@ -1,0 +1,46 @@
+{
+  "geode": "4.4.0",
+  "gd": {
+    "win": "2.2074",
+    "android": "2.2074",
+    "mac": "2.2074",
+    "ios": "2.2074"
+  },
+  "id": "nova.frame-forgiveness",
+  "name": "Frame Forgiveness",
+  "version": "v1.0.0",
+  "developer": "Nova",
+  "description": "Widens the click timing window: late-press grace for cubes and delayed release for early taps.",
+  "settings": {
+    "enabled": {
+      "type": "bool",
+      "name": "Enabled",
+      "description": "Master switch.",
+      "default": true
+    },
+    "late-press-ms": {
+      "type": "int",
+      "name": "Late Press Window (ms)",
+      "description": "A cube jump press still registers this many ms after leaving the ground.",
+      "default": 12,
+      "min": 0,
+      "max": 60,
+      "control": { "input": true, "slider": true }
+    },
+    "hold-extend-ms": {
+      "type": "int",
+      "name": "Hold Extend (ms)",
+      "description": "Jump releases are delayed by this many ms so early taps still catch the landing.",
+      "default": 12,
+      "min": 0,
+      "max": 60,
+      "control": { "input": true, "slider": true }
+    },
+    "debug-log": {
+      "type": "bool",
+      "name": "Debug Logging",
+      "description": "Log every delayed release and late-press save.",
+      "default": false
+    }
+  }
+}
